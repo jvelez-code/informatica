@@ -1,0 +1,62 @@
+package com.udistrital.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.udistrital.model.Genero;
+import com.udistrital.repo.IGeneroRepo;
+import com.udistrital.repo.IGenericRepo;
+import com.udistrital.service.IGeneroService;
+
+@Service
+public class LibroServiceImpl extends CRUDimpl<Genero, String> implements IGeneroService {
+	
+	@Autowired
+	private IGeneroRepo repo;
+
+	@Override
+	protected IGenericRepo<Genero, String> getRepo() {		
+		return repo;
+	}
+
+}
+
+
+//public class GeneroServiceImpl implements IGeneroService {
+//	
+//	@Autowired
+//	private IGeneroRepo repo;
+//
+//	@Override
+//	public Genero registrar(Genero aut) {
+//		return repo.save(aut);
+//		}
+//
+//	@Override
+//	public Genero modificar(Genero aut) {
+//		return repo.save(aut);
+//	}
+//
+//	@Override
+//	public List<Genero> listar() {
+//		return repo.findAll();
+//	}
+//
+//	@Override
+//	public Genero listarPorId(String id) {
+//		 /*Optional se utiliza para evitar que devuelvas un null
+//	    return repo.findById(id)	*/
+//		Optional<Genero> op = repo.findById(id);
+//		return op.isPresent()? op.get() : new Genero();
+//		
+//	}
+//
+//	@Override
+//	public void eliminar(String id) {
+//		repo.deleteById(id);
+//	}
+//
+//}

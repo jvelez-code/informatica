@@ -1,0 +1,31 @@
+
+<mat-card>Ingrese los datos del Autor</mat-card>
+
+<!-- No olvidar agregar ReactiveFormsModule en App.module.ts, util para trabajar con formularios-->
+<form class="example-container" [formGroup]="form" #frmAutor="ngForm" (ngSubmit)="operar()">
+
+    
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Código Autor" required formControlName="codigoAutor">
+    </mat-form-field>
+ 
+
+    <mat-form-field class="example-full-width">            
+        <input matInput placeholder="Nacionalidad" minlength="3" required formControlName="nacionalidad">  
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="Nombre Autor" required formControlName="nombreAutor"> 
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmAutor.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+    <button mat-raised-button color="accent" routerLink='/autor' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

@@ -1,0 +1,75 @@
+package com.udistrital.controller;
+
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.udistrital.model.Autor;
+import com.udistrital.service.IAutorService;
+
+//Se definen los servicios rest
+//entidad-- cliente se comunica con el conttroller --> service --> dao/repo y devulve la cominicacion
+
+@RestController
+@RequestMapping("/autores")
+public class AutorController {
+	
+	@Autowired
+	private IAutorService service;
+
+	@GetMapping
+	public ResponseEntity<List<Autor>> listar() throws Exception{
+		List<Autor> lista = service.listar();
+		return new ResponseEntity<List<Autor>>(lista, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Autor> listarPorId(@PathVariable("id") Integer id) throws Exception{  //@RequestParam
+		Autor obj = service.listarPorId("id");		
+			
+		if(obj == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
+		}
+		return new ResponseEntity<Autor>(obj, HttpStatus.OK);
+	}
+	
+	/*@PostMapping
+	public ResponseEntity<Autor> registrar(@Valid @RequestBody Autor Autor) {
+		Autor obj = service.registrar(Autor);
+		return new ResponseEntity<Autor>(obj, HttpStatus.CREATED);
+	}*/
+	
+	@PostMapping
+	public ResponseEntity<Void> registrar(@Valid @RequestBody AutorListaExamenDTO dto) throws Exception{		
+		Autor obj = service.registrarTransaccional(dto);
+		
+		//localhost:8080/pacientes/7
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdAutor()).toUri();
+		
+		return ResponseEntity.created(location).build();
+	}
+	
+	@PutMapping
+	public ResponseEntity<Autor> modificar(@Valid @RequestBody Autor Autor) throws Exception{
+		Autor obj = service.modificar(Autor);
+		return new ResponseEntity<Autor>(obj, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> eliminar(@PathVariable("id") Integer id) throws Exception{
+		Autor obj = service.listarPorId(id);
+		if(obj == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
+		}
+		service.eliminar(id);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+
+}

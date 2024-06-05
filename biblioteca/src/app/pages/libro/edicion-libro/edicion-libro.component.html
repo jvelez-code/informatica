@@ -1,0 +1,63 @@
+
+<mat-card>Ingrese los datos del Libro</mat-card>
+
+<!-- No olvidar agregar ReactiveFormsModule en App.module.ts, util para trabajar con formularios-->
+<form class="example-container" [formGroup]="form" #frmLibro="ngForm" (ngSubmit)="operar()">
+
+    
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="codigoLibro" required formControlName="codigoLibro">
+    </mat-form-field>
+ 
+
+    <mat-form-field class="example-full-width">            
+        <input matInput placeholder="nombreLibro" minlength="3" required formControlName="nombreLibro">  
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="existencias" required formControlName="existencias"> 
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="precio" required formControlName="precio"> 
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Selecciona autor" [(value)]="idAutor" >
+            <mat-option *ngFor="let e of (this.autor$ | async)" [value]="e.codigoAutor">
+                {{ e.nombreAutor }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Selecciona editorial" [(value)]="idEditorial">
+            <mat-option *ngFor="let e of (this.editorial$ | async)" [value]="e.codigoEditorial">
+                {{ e.nombreEditorial }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Selecciona género" [(value)]="idGenero">
+            <mat-option *ngFor="let e of (this.genero$ | async)" [value]="e.idGenero">
+                {{ e.nombreGenero }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="descripcion" required formControlName="descripcion"> 
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmLibro.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+    <button mat-raised-button color="accent" routerLink='/libros' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

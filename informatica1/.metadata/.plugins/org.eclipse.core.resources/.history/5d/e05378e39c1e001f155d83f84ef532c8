@@ -1,0 +1,46 @@
+package com.udistrital.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.udistrital.model.Autor;
+import com.udistrital.repo.IAutorRepo;
+import com.udistrital.service.IAutorService;
+
+public class AutorServiceImpl implements IAutorService {
+	
+	@Autowired
+	private IAutorRepo;
+
+	@Override
+	public Autor registrar(Autor aut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Autor modificar(Autor aut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Autor> listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Autor listarPorId(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void eliminar(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.udistrital.repo;
+
+public interface IGeneroRepo {
+
+}

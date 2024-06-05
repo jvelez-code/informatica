@@ -1,0 +1,70 @@
+package com.udistrital.controller;
+
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import jakarta.validation.Valid;
+import com.udistrital.model.Autor;
+import com.udistrital.service.IAutorService;
+
+
+//Se definen los servicios rest
+//entidad-- cliente se comunica con el conttroller --> service --> dao/repo y devulve la cominicacion
+
+@RestController
+@RequestMapping("/autores")
+public class GeneroController {
+	
+	@Autowired
+	private IAutorService service;
+
+	@GetMapping
+	public ResponseEntity<List<Autor>> listar() throws Exception{
+		List<Autor> lista = service.listar();
+		return new ResponseEntity<List<Autor>>(lista, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Autor> listarPorId(@PathVariable("id") String id) throws Exception{  //@RequestParam
+		System.out.print(id);
+		Autor obj = service.listarPorId(id);		
+			
+		if(obj == null) {
+			//throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
+		}
+		return new ResponseEntity<Autor>(obj, HttpStatus.OK);
+	}
+	
+	@PostMapping
+	public ResponseEntity<Void> registrar(@Valid @RequestBody Autor paciente) throws Exception{		
+		Autor obj = service.registrar(paciente);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getCodigoAutor()).toUri();
+		
+		return ResponseEntity.created(location).build();
+	}
+	
+	@PutMapping
+	public ResponseEntity<Autor> modificar(@Valid @RequestBody Autor Autor) throws Exception{
+		Autor obj = service.modificar(Autor);
+		return new ResponseEntity<Autor>(obj, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> eliminar(@PathVariable("id") String id) throws Exception{
+		Autor obj = service.listarPorId(id);
+		if(obj == null) {
+			System.out.print(id +"delete");
+			//throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
+		}
+		service.eliminar(id);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+
+}

@@ -1,0 +1,74 @@
+package com.udistrital.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+import java.util.List;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "editorial")
+public class Editorial {
+	
+	
+	@Id
+	@Column(name = "codigo_editorial",nullable = true)
+	private String codigoEditorial;
+	
+	@Column(name = "nombre_editorial",nullable = true)
+	private String nombreEditorial;
+	
+	@Column(name = "contacto",nullable = true)
+	private String contacto;
+	
+	@Column(name = "telefono",nullable = true)
+	private String telefono;
+
+	@OneToMany(mappedBy = "editorial")
+    private List<Libro> libros;
+
+	public String getCodigoEditorial() {
+		return codigoEditorial;
+	}
+
+	public void setCodigoEditorial(String codigoEditorial) {
+		this.codigoEditorial = codigoEditorial;
+	}
+
+	public String getNombreEditorial() {
+		return nombreEditorial;
+	}
+
+	public void setNombreEditorial(String nombreEditorial) {
+		this.nombreEditorial = nombreEditorial;
+	}
+
+	public String getContacto() {
+		return contacto;
+	}
+
+	public void setContacto(String contacto) {
+		this.contacto = contacto;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<Libro> getLibros() {
+		return libros;
+	}
+
+	public void setLibros(List<Libro> libros) {
+		this.libros = libros;
+	}
+	
+	
+	
+}

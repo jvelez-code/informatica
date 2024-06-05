@@ -1,0 +1,5 @@
+package com.udistrital.service;
+
+public interface IAutorService {
+
+}
