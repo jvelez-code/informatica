@@ -1,1 +1,31 @@
-<p>edicion-genero works!</p>
+
+<mat-card>Ingrese los datos del Genero</mat-card>
+
+<!-- No olvidar agregar ReactiveFormsModule en App.module.ts, util para trabajar con formularios-->
+<form class="example-container" [formGroup]="form" #frmGenero="ngForm" (ngSubmit)="operar()">
+
+    
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="idGenero" required formControlName="idGenero">
+    </mat-form-field>
+ 
+
+    <mat-form-field class="example-full-width">            
+        <input matInput placeholder="nombreGenero" minlength="3" required formControlName="nombreGenero">  
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="descripcion" required formControlName="descripcion"> 
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmGenero.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+    <button mat-raised-button color="accent" routerLink='/genero' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

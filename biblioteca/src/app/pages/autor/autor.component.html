@@ -1,7 +1,7 @@
 <router-outlet></router-outlet>
 <mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="codigoAutor">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Código Autor </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.codigoAutor}} </mat-cell>
     </ng-container>
 

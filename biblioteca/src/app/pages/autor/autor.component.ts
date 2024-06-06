@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { switchMap } from 'rxjs/operators';
 import { AutorService } from 'src/app/_services/autor.service';
@@ -15,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AutorComponent implements OnInit {
 
-  id : number = 1 ;
+  id !: number ;
   
 
   displayedColumns = ['codigoAutor', 'nacionalidad', 'nombreAutor', 'acciones'];

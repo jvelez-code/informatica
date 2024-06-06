@@ -1,1 +1,35 @@
-<p>edicion-editorial works!</p>
+
+<mat-card>Ingrese los datos del Editorial</mat-card>
+
+<!-- No olvidar agregar ReactiveFormsModule en App.module.ts, util para trabajar con formularios-->
+<form class="example-container" [formGroup]="form" #frmEditorial="ngForm" (ngSubmit)="operar()">
+
+    
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Código Editorial" required formControlName="codigoEditorial">
+    </mat-form-field>
+ 
+
+    <mat-form-field class="example-full-width">            
+        <input matInput placeholder="Nombre Editorial" minlength="3" required formControlName="nombreEditorial">  
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="Contacto" required formControlName="contacto"> 
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="Teléfono" required formControlName="telefono"> 
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmEditorial.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+    <button mat-raised-button color="accent" routerLink='/editorial' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>
